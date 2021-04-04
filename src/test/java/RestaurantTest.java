@@ -6,6 +6,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -63,4 +65,14 @@ class RestaurantTest {
                 () -> restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void calculate_the_total_order_value_for_the_items_selected() {
+        add_item_to_menu();
+        restaurant.addToMenu("Sizzling brownie", 319);
+        List<String> items = new ArrayList<>();
+        items.add("Sweet corn soup");
+        items.add("Sizzling brownie");
+        assertEquals(438, restaurant.totalOrderValue(items));
+    }
+
 }
