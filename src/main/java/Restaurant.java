@@ -11,6 +11,8 @@ public class Restaurant {
     public LocalTime openingTime;
     public LocalTime closingTime;
     private List<Item> menu = new ArrayList<Item>();
+    private List<String> items_list = new ArrayList<>();
+    private List<Integer> prices = new ArrayList<>();
 
     public Restaurant(String name, String location, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
@@ -45,6 +47,8 @@ public class Restaurant {
 
     public void addToMenu(String name, int price) {
         Item newItem = new Item(name, price);
+        items_list.add(name);
+        prices.add(price);
         menu.add(newItem);
     }
 
@@ -70,4 +74,15 @@ public class Restaurant {
         return name;
     }
 
+    public int totalOrderValue(List<String> items) {
+        int total_sum = 0;
+        for (String item : items) {
+            for (int iter = 0; iter < items_list.size(); iter++) {
+                if (item.equals(items_list.get(iter))) {
+                    total_sum = total_sum + prices.get(iter);
+                }
+            }
+        }
+        return total_sum;
+    }
 }
